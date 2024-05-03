@@ -22,6 +22,14 @@ export const DisplayBooks = () => {
           <li key={index}>
             <h2>{book.title}</h2>
             <p>Author: {book.author_name}</p>
+            {book.cover_i ? (
+              <img
+                src={`https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`}
+                alt="Book Cover"
+              />
+            ) : (
+              <p>No cover available</p>
+            )}
           </li>
         ))}
       </ul>

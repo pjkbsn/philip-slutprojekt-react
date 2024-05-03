@@ -8,7 +8,8 @@ export const useFetch = (API_SEARCH: string) => {
 
   const URL = `https://openlibrary.org/search.json?q=${encodeURIComponent(
     API_SEARCH
-  )}`;
+  )}&fields=*,availability&limit=5`;
+
   useEffect(() => {
     const fetchBooks = async () => {
       try {

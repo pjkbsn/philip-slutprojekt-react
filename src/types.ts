@@ -3,6 +3,7 @@ export type BookType = {
   author_name: string;
   first_publish_year: number;
   first_sentence: string;
+  cover_i: number;
 };
 
 // export type MonsterContextType = {
