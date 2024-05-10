@@ -1,10 +1,30 @@
+@use "../../styles/colors";
+
 .NavBar {
-  position: fixed;
-  top: 0;
   width: 100%;
-  height: 3%;
-  background-color: orange;
+  height: 5rem;
+  background-color: colors.$primary-color;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
+  z-index: 10;
+  .leftsideNavbar {
+    width: 15rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 1rem;
+  }
+  .navBarLink {
+    font-size: 2rem;
+    text-decoration: none;
+    color: colors.$primary-text-color;
+  }
+  .rightsideNavbar {
+    display: flex;
+    justify-content: space-between;
+    width: 30rem;
+    margin-right: 1rem;
+    color: colors.$primary-text-color;
+  }
 }
