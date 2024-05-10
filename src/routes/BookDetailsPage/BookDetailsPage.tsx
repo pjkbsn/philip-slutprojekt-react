@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { BookContext } from "../../data/BookProvider/BookProvider";
-import { BookContextType } from "../../types";
-import { useNavigate, useParams } from "react-router-dom";
+import { BookContextType, BookType } from "../../types";
+import { useParams } from "react-router-dom";
 import "./BookDetailsPage.scss";
 import { Button } from "../../components/Button/Button";
 
@@ -10,9 +10,8 @@ export const BookDetailsPage = () => {
     BookContext
   ) as BookContextType;
   const { key } = useParams();
-  const navigate = useNavigate();
 
-  const bookDetails = data.find((book) => book.key === key);
+  const bookDetails = data.docs.find((book: BookType) => book.key === key);
 
   const handleOnClick = () => {
     if (bookDetails) {
@@ -44,7 +43,6 @@ export const BookDetailsPage = () => {
       type: "REMOVE_FAVORITE",
       payload: key,
     });
-    navigate("/favorites");
   };
 
   return (

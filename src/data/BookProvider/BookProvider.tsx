@@ -1,6 +1,6 @@
 import { ReactNode, createContext, useReducer, useState } from "react";
 import { useFetch } from "../../useHooks/useFetch/useFetch";
-import { BookContextType } from "../../types";
+import { ApiResponse, BookContextType } from "../../types";
 import { BookReducer } from "../../components/BookReducer/BookReducer";
 
 type BookProviderType = {
@@ -15,14 +15,15 @@ export const BookProvider: React.FC<BookProviderType> = ({ children }) => {
   const [searchResult, setSearchResult] = useState("");
   const [favorites, setFavorites] = useReducer(BookReducer, []);
 
-  const { data, loading, error } = useFetch(searchResult);
+  const URL = `https://openlibrary.org/search.json?q=${searchResult}&fields=*,availability&limit=10`;
+  const { data, loading, error } = useFetch<ApiResponse>(URL);
 
   return (
     <BookContext.Provider
       value={{
-        data,
+        data: data || { docs: [], works: [] }, // Add 'works' property to ensure 'data' is of type 'ApiResponse'
         loading,
-        error,
+        error: error as Error | null,
         setSearchResult,
         favorites,
         setFavorites,

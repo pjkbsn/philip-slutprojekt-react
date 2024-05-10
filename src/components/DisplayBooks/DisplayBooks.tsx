@@ -1,42 +1,24 @@
-import { DisplayBooksType } from "../../types";
+import { BookType, DisplayBooksType } from "../../types";
 import "./DisplayBooks.scss";
-
-// import { useContext } from "react";
-// import { BookContext } from "../../data/BookProvider/BookProvider";
-// import { BookContextType } from "../../types";
 
 import { NavLink } from "react-router-dom";
 
 export const DisplayBooks = ({ data }: DisplayBooksType) => {
-  // const { data, loading, error } = useContext(BookContext) as BookContextType;
-  // console.log(data);
+  console.log(data);
 
-  // if (loading) {
-  //   return (
-  //     <div className="DisplayBooks">
-  //       <p>..Loading</p>
-  //     </div>
-  //   );
-  // }
-  // if (error) {
-  //   return (
-  //     <div className="DisplayBooks">
-  //       <p>Error: {error.toString()}</p>
-  //     </div>
-  //   );
-  // }
-  // if (data) {
-
+  // const isBookType = (obj: any): obj is BookType => {
+  //   return (obj as BookType).cover_i !== undefined;
+  // };
   return (
     <div className="DisplayBooks">
       <div className="displayContainer">
         {data &&
           data.map((book, index) => (
             <div key={index} className="bookInfoContainer">
-              {book.cover_i ? (
+              {book.cover_id ? (
                 <img
                   className="bookCover"
-                  src={`https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`}
+                  src={`https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg`}
                   alt="Book Cover"
                 />
               ) : (
@@ -44,7 +26,7 @@ export const DisplayBooks = ({ data }: DisplayBooksType) => {
               )}
               <div className="titleContainer">
                 <h3>{book.title}</h3>
-                <p>{book.author_name}</p>
+                {/* <p>{book.author_name[0]}</p> */}
               </div>
               {/* <NavLink to={`/book${book.key}`}>Details</NavLink> */}
               <NavLink to={`/book/${encodeURIComponent(book.key)}`}>
@@ -55,5 +37,4 @@ export const DisplayBooks = ({ data }: DisplayBooksType) => {
       </div>
     </div>
   );
-  // }
 };

@@ -26,7 +26,7 @@ export const DisplayedBooks = () => {
   if (data) {
     return (
       <>
-        <DisplayBooks data={data} />
+        <DisplayBooks data={data.docs} />
       </>
     );
   }
