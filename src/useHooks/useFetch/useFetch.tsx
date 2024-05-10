@@ -6,15 +6,14 @@ export const useFetch = (API_SEARCH: string) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<any>(null);
 
-  const URL = `https://openlibrary.org/search.json?q=${encodeURIComponent(
-    API_SEARCH
-  )}&fields=*,availability&limit=5`;
+  const URL = `https://openlibrary.org/search.json?q=${API_SEARCH}&fields=*,availability&limit=10`;
 
   useEffect(() => {
     const fetchBooks = async () => {
       try {
         setLoading(true);
         const response = await fetch(URL);
+
         if (!response.ok) {
           throw new Error("Responsedata not OK");
         }
