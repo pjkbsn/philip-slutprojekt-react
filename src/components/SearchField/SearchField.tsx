@@ -3,10 +3,8 @@ import "./SearchField.scss";
 import { Button } from "../Button/Button";
 // import { useFetch } from "../../useHooks/useFetch/useFetch";
 import { useNavigate } from "react-router-dom";
-import {
-  BookContext,
-  BookContextType,
-} from "../../data/BookProvider/BookProvider";
+import { BookContext } from "../../data/BookProvider/BookProvider";
+import { BookContextType } from "../../types";
 
 export const SearchField = () => {
   const [result, setResult] = useState("");
