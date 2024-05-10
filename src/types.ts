@@ -8,16 +8,28 @@ export type BookType = {
   key: string;
 };
 
+export type WorkType = {
+  title: string;
+  key: string;
+  subject: string[];
+  cover_id: number;
+};
+
 export type AuthorType = {
   name: string;
 };
 
 export type DisplayBooksType = {
-  data: BookType[];
+  data: BookType[] | WorkType[];
+};
+
+export type ApiResponse = {
+  docs: BookType[];
+  works: WorkType[];
 };
 
 export type BookContextType = {
-  data: BookType[];
+  data: ApiResponse;
   loading: boolean;
   error: Error | null;
   setSearchResult: React.Dispatch<React.SetStateAction<string>>;
