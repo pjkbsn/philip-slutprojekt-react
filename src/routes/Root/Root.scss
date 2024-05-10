@@ -1,5 +1,7 @@
+@use "../../styles/colors";
 .Root {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 }
