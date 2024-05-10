@@ -1,3 +1,33 @@
-* {
-  color: black;
+@use "../../styles/colors";
+
+.DisplayBooks {
+  margin-top: 7rem;
+  width: 80rem;
+  display: flex;
+  flex-direction: row;
+
+  background-color: colors.$primary-color;
+  .displayContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    color: colors.$secondary-text-color;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 3rem;
+    padding: 1rem;
+    .bookInfoContainer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      .titleContainer {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 0.5rem;
+      }
+    }
+  }
 }
