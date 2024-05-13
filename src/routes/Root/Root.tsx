@@ -1,7 +1,7 @@
 import { Outlet, useLocation } from "react-router-dom";
 import { NavBar } from "../../components/NavBar/NavBar";
 import "./Root.scss";
-import { FrontPage } from "../../components/FrontPage/FrontPage";
+import { FrontPage } from "../FrontPage/FrontPage";
 
 export const Root = () => {
   const location = useLocation();

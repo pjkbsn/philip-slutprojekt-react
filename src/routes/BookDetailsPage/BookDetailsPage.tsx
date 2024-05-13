@@ -11,6 +11,8 @@ export const BookDetailsPage = () => {
   ) as BookContextType;
   const { key } = useParams();
 
+  // Går det använda {key} till att fetcha här inne och displaya den datan istället för ifrån det globala contextet?
+
   const bookDetails = data.docs.find((book: BookType) => book.key === key);
 
   const handleOnClick = () => {

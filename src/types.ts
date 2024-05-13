@@ -3,7 +3,7 @@ export type BookType = {
   author_name: string;
   first_publish_year: number;
   first_sentence: string;
-  cover_i: number;
+  cover_i?: number;
   cover_edition_key: string;
   key: string;
 };
@@ -12,15 +12,15 @@ export type WorkType = {
   title: string;
   key: string;
   subject: string[];
-  cover_id: number;
-};
-
-export type AuthorType = {
-  name: string;
+  cover_id?: number;
 };
 
 export type DisplayBooksType = {
   data: BookType[] | WorkType[];
+};
+
+export type AuthorType = {
+  name: string;
 };
 
 export type ApiResponse = {
