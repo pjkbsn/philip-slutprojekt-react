@@ -1,11 +1,16 @@
 import { useContext } from "react";
 import { DisplayBooks } from "../../components/DisplayBooks/DisplayBooks";
 import { BookContext } from "../../data/BookProvider/BookProvider";
-import { BookContextType } from "../../types";
+import { ApiResponse, BookContextType } from "../../types";
 import "./DisplayedBooks.scss";
+import { useFetch } from "../../useHooks/useFetch/useFetch";
 
 export const DisplayedBooks = () => {
-  const { data, loading, error } = useContext(BookContext) as BookContextType;
+  const { searchResult } = useContext(BookContext) as BookContextType;
+
+  const { data, loading, error } = useFetch<ApiResponse>(
+    `https://openlibrary.org/search.json?q=${searchResult}&fields=*,availability&limit=10`
+  );
 
   console.log(data);
 
@@ -16,6 +21,7 @@ export const DisplayedBooks = () => {
       </div>
     );
   }
+
   if (error) {
     return (
       <div className="DisplayBooks">
@@ -26,7 +32,7 @@ export const DisplayedBooks = () => {
   if (data) {
     return (
       <>
-        <DisplayBooks data={data.docs} />
+        <DisplayBooks data={data.docs} search={searchResult} />
       </>
     );
   }
