@@ -1,13 +1,17 @@
 @use "../../styles/colors";
-
+.SearchInput {
+  margin-top: 3rem;
+  color: colors.$secondary-text-color;
+}
 .DisplayBooks {
-  margin-top: 7rem;
+  margin-top: 1rem;
   width: 80rem;
   display: flex;
   flex-direction: row;
+  justify-content: center;
 
-  background-color: colors.$primary-color;
   .displayContainer {
+    background-color: colors.$primary-color;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
@@ -15,8 +19,13 @@
     flex-direction: row;
     flex-wrap: wrap;
     gap: 3rem;
-    padding: 1rem;
+    .CoverImg {
+      width: 13rem;
+      height: auto;
+    }
     .bookInfoContainer {
+      margin-top: 1rem;
+      margin-bottom: 1rem;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -26,7 +35,30 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        text-align: center;
+        width: 12rem;
         margin: 0.5rem;
+      }
+
+      .reviewSection {
+        padding: 1rem;
+        height: fit-content;
+        max-height: 15rem;
+        width: 15rem;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        margin-top: 0.5rem;
+        margin-bottom: 2rem;
+        .reviewTitle {
+          margin-bottom: 0.5rem;
+        }
+        .reviewText {
+          padding: 0.5rem;
+          // margin-top: 1rem;
+          overflow-y: auto;
+          word-break: break-all;
+        }
       }
     }
   }
