@@ -1,15 +1,16 @@
 import { ApiResponse } from "../../types";
 import { useFetch } from "../../useHooks/useFetch/useFetch";
 import { DisplayBooks } from "../DisplayBooks/DisplayBooks";
+import "./FrontPageDisplayer.scss";
 
 export const FrontPageDisplayer = ({ type, genre }: any) => {
-  const { data, loading, error } = useFetch<ApiResponse>(
+  const { data } = useFetch<ApiResponse>(
     `https://openlibrary.org/subjects/${type}.json?limit=5`
   );
 
   return (
     <>
-      <h1>{genre}</h1>
+      <h1 className="FrontPageGenre">{genre}</h1>
       {data && <DisplayBooks data={data.works} />}
     </>
   );
