@@ -5,10 +5,9 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { Root } from "./routes/Root/Root";
 import { DisplayedBooks } from "./routes/DisplayedBooks/DisplayedBooks";
 import { BookProvider } from "./data/BookProvider/BookProvider";
-import { CategoriesPage } from "./routes/CategoriesPage/CategoriesPage";
 import { FavoritesPage } from "./routes/FavoritesPage/FavoritesPage";
 import { BookDetailsPage } from "./routes/BookDetailsPage/BookDetailsPage";
-import { Read } from "./components/Read/Read";
+import { ReadPage } from "./routes/ReadPage/ReadPage";
 
 const router = createBrowserRouter([
   {
@@ -20,10 +19,6 @@ const router = createBrowserRouter([
         element: <DisplayedBooks />,
       },
       {
-        path: "/categories/",
-        element: <CategoriesPage />,
-      },
-      {
         path: "/favorites/",
         element: <FavoritesPage />,
       },
@@ -33,7 +28,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/read/",
-        element: <Read />,
+        element: <ReadPage />,
       },
     ],
   },
