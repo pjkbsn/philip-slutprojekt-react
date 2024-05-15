@@ -36,25 +36,17 @@ export const BookDetailsPage = () => {
     }
   }, [data]);
 
-  console.log(authorData);
-  console.log(authorData.map((author) => author.birth_date));
-
+  const alreadyAddedToFavorites = favorites.some(
+    (favorite) => favorite.key === key
+  );
   const handleOnClick = () => {
     if (data) {
-      const alreadyAddedToFavorites = favorites.some(
-        (favorite) => favorite.key === data.key
-      );
-
       if (!alreadyAddedToFavorites) {
         setFavorites({
           type: "ADD_FAVORITE",
           payload: {
-            // author_name: data.author_name,
             title: data.title,
-            // first_publish_year: data.first_publish_year,
-            // first_sentence: data.first_sentence,
             cover_i: data.covers[0],
-            // cover_edition_key: data.cover_edition_key,
             key: data.key,
           },
         });
@@ -103,7 +95,6 @@ export const BookDetailsPage = () => {
   };
 
   const handleRemoveReadClick = (key: string) => {
-    // Skicka boken + textfält(?) med hjälp av action?
     setReadList({
       type: "REMOVE_FAVORITE",
       payload: key,
@@ -128,28 +119,26 @@ export const BookDetailsPage = () => {
                 alt="No cover available"
               />
             )}
-            <h3>Add to Favorites?</h3>
             <div className="leftsideButtons">
-              <Button buttonName="Add" handleClick={handleOnClick} />
-              <Button
-                buttonName="Remove"
-                handleClick={() => handleRemoveClick(data.key)}
-              />
-            </div>
-            <div>
-              <h2>Have you read this Book?</h2>
-              {alreadyAddedToRead ? (
+              {alreadyAddedToFavorites ? (
                 <Button
-                  buttonName="Add review"
-                  handleClick={handleOnReadClick}
+                  buttonName="Remove from favorites"
+                  handleClick={() => handleRemoveClick(data.key)}
                 />
               ) : (
-                <Button buttonName="Yes" handleClick={handleOnReadClick} />
+                <Button
+                  buttonName="Add to favorites"
+                  handleClick={handleOnClick}
+                />
               )}
-              <Button
-                buttonName="No"
-                handleClick={() => handleRemoveReadClick(data.key)}
-              />
+            </div>
+            <div className="reviewContainer">
+              {alreadyAddedToRead ? (
+                <h2>Add a review</h2>
+              ) : (
+                <h2>Have you read this Book?</h2>
+              )}
+
               {alreadyAddedToRead && (
                 <>
                   <textarea
@@ -172,6 +161,24 @@ export const BookDetailsPage = () => {
                     setRatingValue={setRatingValue}
                   />
                 </>
+              )}
+              {alreadyAddedToRead ? (
+                <div className="reviewButtons">
+                  <Button
+                    buttonName="Add review"
+                    handleClick={handleOnReadClick}
+                  />
+
+                  <Button
+                    buttonName="Remove from read"
+                    handleClick={() => handleRemoveReadClick(data.key)}
+                  />
+                </div>
+              ) : (
+                <Button
+                  buttonName="Add to read"
+                  handleClick={handleOnReadClick}
+                />
               )}
             </div>
           </div>
