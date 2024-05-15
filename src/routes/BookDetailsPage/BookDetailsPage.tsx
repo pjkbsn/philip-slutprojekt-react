@@ -1,37 +1,61 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { BookContext } from "../../data/BookProvider/BookProvider";
-import { BookContextType, BookType } from "../../types";
+import { /*  ApiResponse, */ BookContextType, WorkType } from "../../types";
 import { useParams } from "react-router-dom";
 import "./BookDetailsPage.scss";
 import { Button } from "../../components/Button/Button";
+import { useFetch } from "../../useHooks/useFetch/useFetch";
+import { RatingComponent } from "../../components/Rating/DisplayRating";
 
 export const BookDetailsPage = () => {
-  const { data, setFavorites, favorites } = useContext(
+  const [reviewValue, setReviewValue] = useState("");
+  const [pagesNumber, setPagesNumber] = useState<number>(0);
+  const [authorData, setAuthorData] = useState<any[]>([]);
+  const [ratingValue, setRatingValue] = useState<number | null>(2);
+  const { setFavorites, favorites, readList, setReadList } = useContext(
     BookContext
   ) as BookContextType;
   const { key } = useParams();
 
-  // Går det använda {key} till att fetcha här inne och displaya den datan istället för ifrån det globala contextet?
+  const { data } = useFetch<WorkType>(`https://openlibrary.org${key}.json`);
+  console.log(data);
+  console.log("Pages", pagesNumber);
 
-  const bookDetails = data.docs.find((book: BookType) => book.key === key);
+  useEffect(() => {
+    if (data) {
+      const fetchAuthorData = async () => {
+        const authorData = data.authors.map((author) =>
+          fetch(`https://openlibrary.org${author.author.key}.json`).then(
+            (response) => response.json()
+          )
+        );
+        const authorResult = await Promise.all(authorData);
+        setAuthorData(authorResult);
+      };
+      fetchAuthorData();
+    }
+  }, [data]);
+
+  console.log(authorData);
+  console.log(authorData.map((author) => author.birth_date));
 
   const handleOnClick = () => {
-    if (bookDetails) {
+    if (data) {
       const alreadyAddedToFavorites = favorites.some(
-        (favorite) => favorite.key === bookDetails.key
+        (favorite) => favorite.key === data.key
       );
 
       if (!alreadyAddedToFavorites) {
         setFavorites({
           type: "ADD_FAVORITE",
           payload: {
-            author_name: bookDetails.author_name,
-            title: bookDetails.title,
-            first_publish_year: bookDetails.first_publish_year,
-            first_sentence: bookDetails.first_sentence,
-            cover_i: bookDetails.cover_i,
-            cover_edition_key: bookDetails.cover_edition_key,
-            key: bookDetails.key,
+            // author_name: data.author_name,
+            title: data.title,
+            // first_publish_year: data.first_publish_year,
+            // first_sentence: data.first_sentence,
+            cover_i: data.covers[0],
+            // cover_edition_key: data.cover_edition_key,
+            key: data.key,
           },
         });
       } else {
@@ -47,37 +71,133 @@ export const BookDetailsPage = () => {
     });
   };
 
+  const alreadyAddedToRead = readList.some((read) => read.key === key);
+  const handleOnReadClick = () => {
+    if (data) {
+      if (!alreadyAddedToRead) {
+        setReadList({
+          type: "ADD_READ",
+          payload: {
+            // author_name: data.author_name,
+            title: data.title,
+            // first_publish_year: data.first_publish_year,
+            // first_sentence: data.first_sentence,
+            cover_i: data.covers[0],
+            // cover_edition_key: data.cover_edition_key,
+            key: data.key,
+            // review: reviewValue,
+          },
+        });
+      } else {
+        setReadList({
+          type: "UPDATE_REVIEW",
+          payload: {
+            key: data.key,
+            review: reviewValue,
+            rating: ratingValue,
+            pages: pagesNumber,
+          },
+        });
+      }
+    }
+  };
+
+  const handleRemoveReadClick = (key: string) => {
+    // Skicka boken + textfält(?) med hjälp av action?
+    setReadList({
+      type: "REMOVE_FAVORITE",
+      payload: key,
+    });
+  };
+
   return (
-    <div className="bookDetails">
-      {bookDetails && (
-        <>
+    <>
+      {data && (
+        <div className="bookDetails">
           <div className="leftsideDetails">
-            <img
-              className="bookCover"
-              src={`https://covers.openlibrary.org/b/id/${bookDetails.cover_i}-M.jpg`}
-              alt=""
-            />
+            {data.covers ? (
+              <img
+                className="bookCover"
+                src={`https://covers.openlibrary.org/b/id/${data.covers[0]}-M.jpg`}
+                alt=""
+              />
+            ) : (
+              <img
+                className="CoverImg"
+                src="/assets/img/No-Image-Placeholder.svg"
+                alt="No cover available"
+              />
+            )}
             <h3>Add to Favorites?</h3>
             <div className="leftsideButtons">
               <Button buttonName="Add" handleClick={handleOnClick} />
               <Button
                 buttonName="Remove"
-                handleClick={() => handleRemoveClick(bookDetails.key)}
+                handleClick={() => handleRemoveClick(data.key)}
               />
+            </div>
+            <div>
+              <h2>Have you read this Book?</h2>
+              {alreadyAddedToRead ? (
+                <Button
+                  buttonName="Add review"
+                  handleClick={handleOnReadClick}
+                />
+              ) : (
+                <Button buttonName="Yes" handleClick={handleOnReadClick} />
+              )}
+              <Button
+                buttonName="No"
+                handleClick={() => handleRemoveReadClick(data.key)}
+              />
+              {alreadyAddedToRead && (
+                <>
+                  <textarea
+                    name=""
+                    id=""
+                    value={reviewValue}
+                    placeholder="Write your review.."
+                    onChange={(e) => setReviewValue(e.target.value)}
+                  />
+
+                  <p>How many pages was the book?</p>
+                  <input
+                    type="number"
+                    value={pagesNumber}
+                    onChange={(e) => setPagesNumber(parseInt(e.target.value))}
+                  />
+
+                  <RatingComponent
+                    ratingValue={ratingValue}
+                    setRatingValue={setRatingValue}
+                  />
+                </>
+              )}
             </div>
           </div>
           <div className="container">
             <div className="bookCoverInfo">
-              <h1 className="bookTitleFlex">Title: {bookDetails.title}</h1>
-              <h2>Published: {bookDetails.first_publish_year}</h2>
-              <p>Author: {bookDetails.author_name}</p>
+              <h1 className="bookTitleFlex">Title: {data.title}</h1>
+              {authorData.map((author) => (
+                <>
+                  <p>{author.name}</p>
+                  <p>{author.birth_date}</p>
+                </>
+              ))}
             </div>
-            <div className="description">
-              <p>First sentence: {bookDetails.first_sentence[0]}</p>
+            <div className="descriptionContainer">
+              {data.description && (
+                <p className="description">
+                  {typeof data.description === "string"
+                    ? data.description
+                    : data.description.value}
+                </p>
+              )}
+              {!data.description && <p>No description available</p>}
             </div>
           </div>
-        </>
+        </div>
       )}
-    </div>
+    </>
   );
 };
