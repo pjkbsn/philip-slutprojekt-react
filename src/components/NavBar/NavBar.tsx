@@ -23,9 +23,6 @@ export const NavBar = () => {
           <NavLink to="/read/" className="navBarLink">
             Read
           </NavLink>
-          <NavLink to="/categories" className="navBarLink">
-            Categories
-          </NavLink>
         </div>
       </div>
     </>

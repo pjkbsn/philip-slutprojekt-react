@@ -22,7 +22,7 @@
   }
   .rightsideNavbar {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     width: 30rem;
     margin-right: 1rem;
     color: colors.$primary-text-color;
