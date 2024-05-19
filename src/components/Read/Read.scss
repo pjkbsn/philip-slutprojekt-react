@@ -1,0 +1,5 @@
+@use "../../styles/colors";
+.readText {
+  margin-top: 3rem;
+  color: colors.$secondary-text-color;
+}

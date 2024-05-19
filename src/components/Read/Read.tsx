@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { BookContext } from "../../data/BookProvider/BookProvider";
 import { BookContextType } from "../../types";
 import { DisplayBooks } from "../DisplayBooks/DisplayBooks";
+import "./Read.scss";
 
 export const Read = () => {
   const { readList } = useContext(BookContext) as BookContextType;
@@ -12,8 +13,12 @@ export const Read = () => {
   );
   return (
     <>
-      <h1>Books read: {totalBooksRead}</h1>
-      <h1>Total pages: {totalPages}</h1>
+      <h1 className="readText">Books read: {totalBooksRead}</h1>
+
+      {totalPages > 0 && (
+        <h1 className="readText">Total pages: {totalPages}</h1>
+      )}
+
       {readList && <DisplayBooks data={readList} />}
     </>
   );

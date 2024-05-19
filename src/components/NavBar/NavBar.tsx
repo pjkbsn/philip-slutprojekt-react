@@ -1,6 +1,9 @@
 import "./NavBar.scss";
 import { SearchField } from "../SearchField/SearchField";
 import { NavLink } from "react-router-dom";
+import { BsBookmarkHeartFill } from "react-icons/bs";
+import { FaReadme } from "react-icons/fa";
+
 // import { MyListbox } from "../ListBox/ListBox";
 
 export const NavBar = () => {
@@ -8,22 +11,20 @@ export const NavBar = () => {
     <>
       <div className="NavBar">
         <div className="leftsideNavbar">
+          <SearchField />
+        </div>
+        <div className="middleNavbar">
+          <NavLink to="/favorites/" className="navBarLink">
+            <BsBookmarkHeartFill />
+          </NavLink>
           <NavLink to="/" className="navBarLink">
             Home
           </NavLink>
-          {/* <div className="listBox">
-            <MyListbox />
-          </div> */}
-          <SearchField />
-        </div>
-        <div className="rightsideNavbar">
-          <NavLink to="/favorites/" className="navBarLink">
-            Favorites
-          </NavLink>
           <NavLink to="/read/" className="navBarLink">
-            Read
+            <FaReadme />
           </NavLink>
         </div>
+        <div className="rightsideNavbar"></div>
       </div>
     </>
   );

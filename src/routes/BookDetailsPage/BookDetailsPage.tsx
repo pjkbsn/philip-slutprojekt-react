@@ -6,6 +6,7 @@ import "./BookDetailsPage.scss";
 import { Button } from "../../components/Button/Button";
 import { useFetch } from "../../useHooks/useFetch/useFetch";
 import { RatingComponent } from "../../components/Rating/DisplayRating";
+import { IoIosHeartEmpty, IoMdHeart } from "react-icons/io";
 
 export const BookDetailsPage = () => {
   const [reviewValue, setReviewValue] = useState("");
@@ -120,14 +121,17 @@ export const BookDetailsPage = () => {
               />
             )}
             <div className="leftsideButtons">
+              <h2>Favorite</h2>
               {alreadyAddedToFavorites ? (
                 <Button
-                  buttonName="Remove from favorites"
+                  style="filledFavorite"
+                  buttonName={<IoMdHeart className="filledHeart" />}
                   handleClick={() => handleRemoveClick(data.key)}
                 />
               ) : (
                 <Button
-                  buttonName="Add to favorites"
+                  style="emptyFavorite"
+                  buttonName={<IoIosHeartEmpty className="emptyHeart" />}
                   handleClick={handleOnClick}
                 />
               )}
@@ -165,17 +169,20 @@ export const BookDetailsPage = () => {
               {alreadyAddedToRead ? (
                 <div className="reviewButtons">
                   <Button
+                    style="placeholder"
                     buttonName="Add review"
                     handleClick={handleOnReadClick}
                   />
 
                   <Button
+                    style="placeholder"
                     buttonName="Remove from read"
                     handleClick={() => handleRemoveReadClick(data.key)}
                   />
                 </div>
               ) : (
                 <Button
+                  style="placeholder"
                   buttonName="Add to read"
                   handleClick={handleOnReadClick}
                 />

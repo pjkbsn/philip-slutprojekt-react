@@ -9,21 +9,27 @@
   align-items: center;
   z-index: 10;
   .leftsideNavbar {
-    width: 15rem;
+    width: 20rem;
     display: flex;
-    justify-content: space-between;
     align-items: center;
     margin-left: 1rem;
+  }
+  .middleNavbar {
+    width: 20rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
   }
   .navBarLink {
     font-size: 2rem;
     text-decoration: none;
     color: colors.$primary-text-color;
+    &:hover {
+      color: colors.$secondary-text-color;
+    }
   }
   .rightsideNavbar {
-    display: flex;
-    justify-content: space-evenly;
-    width: 30rem;
+    width: 20rem;
     margin-right: 1rem;
     color: colors.$primary-text-color;
   }

@@ -5,6 +5,7 @@ import { Button } from "../Button/Button";
 import { useNavigate } from "react-router-dom";
 import { BookContext } from "../../data/BookProvider/BookProvider";
 import { BookContextType } from "../../types";
+import { GiArchiveResearch } from "react-icons/gi";
 
 export const SearchField = () => {
   const [result, setResult] = useState("");
@@ -13,7 +14,7 @@ export const SearchField = () => {
 
   // const { data, loading, error } = useFetch(search);
 
-  const handleChange = (event: any) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setResult(event.target.value);
   };
   const handleOnClick = () => {
@@ -22,8 +23,17 @@ export const SearchField = () => {
   };
   return (
     <div className="SearchField">
-      <input className="SearchFieldInput" type="text" onChange={handleChange} />
-      <Button handleClick={handleOnClick} buttonName="Hej" />
+      <input
+        className="SearchFieldInput"
+        type="text"
+        placeholder="Search title.."
+        onChange={handleChange}
+      />
+      <Button
+        style="searchButton"
+        handleClick={handleOnClick}
+        buttonName={<GiArchiveResearch className="searchIcon" />}
+      />
     </div>
   );
 };
