@@ -4,16 +4,40 @@ import { DisplayBooks } from "../DisplayBooks/DisplayBooks";
 import "./FrontPageDisplayer.scss";
 
 export const FrontPageDisplayer = ({ type, genre }: any) => {
-  const { data } = useFetch<ApiResponse>(
+  const { data, error, loading } = useFetch<ApiResponse>(
     `https://openlibrary.org/subjects/${type}.json?limit=5`
   );
 
-  return (
-    <>
-      <h1 className="FrontPageGenre">{genre}</h1>
-      {data && <DisplayBooks data={data.works} />}
-    </>
-  );
+  if (loading) {
+    return (
+      <div className="DisplayBooks">
+        <p>..Loading</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="DisplayBooks">
+        <p>Error: {error.toString()}</p>
+      </div>
+    );
+  }
+
+  if (data) {
+    return (
+      <>
+        <h1 className="FrontPageGenre">{genre}</h1>
+        {data && <DisplayBooks data={data.works} />}
+      </>
+    );
+  }
+  // return (
+  //   <>
+  //     <h1 className="FrontPageGenre">{genre}</h1>
+  //     {data && <DisplayBooks data={data.works} />}
+  //   </>
+  // );
 };
 
 // Skaffa en array med olika genrer som displayar olika varje gång man kommer tillbaka till frontpage(random)

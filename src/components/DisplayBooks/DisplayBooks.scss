@@ -11,6 +11,8 @@
   justify-content: center;
 
   .displayContainer {
+    border-radius: 5px;
+    box-shadow: 0.3rem 0.2rem 1rem rgba(255, 255, 255, 0.267);
     background-color: colors.$primary-color;
     display: flex;
     align-items: center;

@@ -38,6 +38,7 @@ export type DisplayBooksType = {
 
 export type AuthorType = {
   name: string;
+  birth_date: string;
 };
 
 export type ApiResponse = {

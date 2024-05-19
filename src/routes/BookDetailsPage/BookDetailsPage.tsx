@@ -1,6 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import { BookContext } from "../../data/BookProvider/BookProvider";
-import { /*  ApiResponse, */ BookContextType, WorkType } from "../../types";
+import {
+  /*  ApiResponse, */ AuthorType,
+  BookContextType,
+  WorkType,
+} from "../../types";
 import { useParams } from "react-router-dom";
 import "./BookDetailsPage.scss";
 import { Button } from "../../components/Button/Button";
@@ -11,7 +15,7 @@ import { IoIosHeartEmpty, IoMdHeart } from "react-icons/io";
 export const BookDetailsPage = () => {
   const [reviewValue, setReviewValue] = useState("");
   const [pagesNumber, setPagesNumber] = useState<number>(0);
-  const [authorData, setAuthorData] = useState<any[]>([]);
+  const [authorData, setAuthorData] = useState<AuthorType[]>([]);
   const [ratingValue, setRatingValue] = useState<number | null>(2);
   const { setFavorites, favorites, readList, setReadList } = useContext(
     BookContext
