@@ -3,7 +3,12 @@ import { useFetch } from "../../useHooks/useFetch/useFetch";
 import { DisplayBooks } from "../DisplayBooks/DisplayBooks";
 import "./FrontPageDisplayer.scss";
 
-export const FrontPageDisplayer = ({ type, genre }: any) => {
+type FrontPageProps = {
+  type: string;
+  genre: string;
+};
+
+export const FrontPageDisplayer = ({ type, genre }: FrontPageProps) => {
   const { data, error, loading } = useFetch<ApiResponse>(
     `https://openlibrary.org/subjects/${type}.json?limit=5`
   );

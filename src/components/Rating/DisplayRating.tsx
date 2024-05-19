@@ -1,5 +1,10 @@
 import { Box, Rating, Typography } from "@mui/material";
 
+type RatingComponentProps = {
+  ratingValue: number | null;
+  setRatingValue: (value: number | null) => void;
+};
+
 export const RatingDisplay = ({ ratingValue }: { ratingValue: number }) => {
   return (
     <>
@@ -9,7 +14,10 @@ export const RatingDisplay = ({ ratingValue }: { ratingValue: number }) => {
   );
 };
 
-export const RatingComponent = ({ ratingValue, setRatingValue }: any) => {
+export const RatingComponent = ({
+  ratingValue,
+  setRatingValue,
+}: RatingComponentProps) => {
   //   const [value, setValue] = React.useState<number | null>(2);
 
   return (
