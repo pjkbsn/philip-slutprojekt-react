@@ -5,8 +5,6 @@ import "./DisplayBooks.scss";
 import { NavLink } from "react-router-dom";
 
 export const DisplayBooks = ({ data, search }: DisplayBooksType) => {
-  console.log(data);
-
   return (
     <>
       {search ? <h1 className="SearchInput">{search.toUpperCase()}</h1> : ""}

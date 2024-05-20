@@ -37,14 +37,4 @@ export const FrontPageDisplayer = ({ type, genre }: FrontPageProps) => {
       </>
     );
   }
-  // return (
-  //   <>
-  //     <h1 className="FrontPageGenre">{genre}</h1>
-  //     {data && <DisplayBooks data={data.works} />}
-  //   </>
-  // );
 };
-
-// Skaffa en array med olika genrer som displayar olika varje gång man kommer tillbaka till frontpage(random)
-
-// Skapa en FrontPage route och skicka med olika props hit för att displaya flera genrer.

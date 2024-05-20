@@ -1,6 +1,4 @@
 import { FrontPageDisplayer } from "../../components/FrontPageDisplayer/FrontPageDisplayer";
-// import { ApiResponse } from "../../types";
-// import { useFetch } from "../../useHooks/useFetch/useFetch";
 
 export const FrontPage = () => {
   return (
