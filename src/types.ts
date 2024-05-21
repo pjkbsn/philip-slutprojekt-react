@@ -1,11 +1,7 @@
 export type BookType = {
   title: string;
-  // author_name: string;
-  // first_publish_year: number;
-  // first_sentence: string;
   cover_i?: number;
   cover_id?: number;
-  // cover_edition_key: string;
   key: string;
   review?: string;
   rating?: any;
@@ -47,9 +43,6 @@ export type ApiResponse = {
 };
 
 export type BookContextType = {
-  // data: ApiResponse;
-  // loading: boolean;
-  // error: Error | null;
   setSearchResult: React.Dispatch<React.SetStateAction<string>>;
   searchResult: string;
   favorites: BookType[];

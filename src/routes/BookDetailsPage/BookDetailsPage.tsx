@@ -1,10 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { BookContext } from "../../data/BookProvider/BookProvider";
-import {
-  /*  ApiResponse, */ AuthorType,
-  BookContextType,
-  WorkType,
-} from "../../types";
+import { AuthorType, BookContextType, WorkType } from "../../types";
 import { useParams } from "react-router-dom";
 import "./BookDetailsPage.scss";
 import { Button } from "../../components/Button/Button";
@@ -23,8 +19,6 @@ export const BookDetailsPage = () => {
   const { key } = useParams();
 
   const { data } = useFetch<WorkType>(`https://openlibrary.org${key}.json`);
-  console.log(data);
-  console.log("Pages", pagesNumber);
 
   useEffect(() => {
     if (data) {
@@ -75,14 +69,9 @@ export const BookDetailsPage = () => {
         setReadList({
           type: "ADD_READ",
           payload: {
-            // author_name: data.author_name,
             title: data.title,
-            // first_publish_year: data.first_publish_year,
-            // first_sentence: data.first_sentence,
             cover_i: data.covers[0],
-            // cover_edition_key: data.cover_edition_key,
             key: data.key,
-            // review: reviewValue,
           },
         });
       } else {
@@ -196,9 +185,9 @@ export const BookDetailsPage = () => {
           <div className="container">
             <div className="bookCoverInfo">
               <h1 className="bookTitleFlex">Title: {data.title}</h1>
-              {authorData.map((author) => (
+              {authorData.map((author, index) => (
                 <>
-                  <p>{author.name}</p>
+                  <p key={index}>{author.name}</p>
                   <p>{author.birth_date}</p>
                 </>
               ))}

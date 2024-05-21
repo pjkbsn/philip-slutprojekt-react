@@ -15,15 +15,9 @@ export const BookProvider: React.FC<BookProviderType> = ({ children }) => {
   const [favorites, setFavorites] = useReducer(BookReducer, []);
   const [readList, setReadList] = useReducer(BookReducer, []);
 
-  // const URL = `https://openlibrary.org/search.json?q=${searchResult}&fields=*,availability&limit=10`;
-  // const { data, loading, error } = useFetch<ApiResponse>(searchResult);
-
   return (
     <BookContext.Provider
       value={{
-        // data: data || { docs: [], works: [] },
-        // loading,
-        // error: error as Error | null,
         setSearchResult,
         searchResult,
         favorites,

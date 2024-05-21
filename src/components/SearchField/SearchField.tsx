@@ -12,8 +12,6 @@ export const SearchField = () => {
   const { setSearchResult } = useContext(BookContext) as BookContextType;
   const navigate = useNavigate();
 
-  // const { data, loading, error } = useFetch(search);
-
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setResult(event.target.value);
   };
