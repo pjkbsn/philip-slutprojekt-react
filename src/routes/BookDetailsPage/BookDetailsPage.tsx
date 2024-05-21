@@ -29,12 +29,12 @@ export const BookDetailsPage = () => {
   useEffect(() => {
     if (data) {
       const fetchAuthorData = async () => {
-        const authorData = data.authors.map((author) =>
+        const authorFetchData = data.authors.map((author) =>
           fetch(`https://openlibrary.org${author.author.key}.json`).then(
             (response) => response.json()
           )
         );
-        const authorResult = await Promise.all(authorData);
+        const authorResult = await Promise.all(authorFetchData);
         setAuthorData(authorResult);
       };
       fetchAuthorData();

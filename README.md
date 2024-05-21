@@ -1,9 +1,13 @@
-Philip-slutprojekt
+# Philip-slutprojekt
 
-To get started with this project, clone the repository and install the dependencies.
+## Book Explorer
+
+Book Explorer is a user-friendly application that leverages the OpenLibrary API to help you discover and manage your favorite books. With Book Explorer, you can easily search for book titles, add them to your list of favorites, and mark the books you've read. Simplify your reading journey and keep track of your literary adventures with Book Explorer.
+
+### To get started with this project, clone the repository and install the dependencies.
 
 git clone https://github.com/pjkbsn/philip-slutprojekt-react.git
-cd your-repo-name
+cd philip-slutprojekt-react
 npm install
 
 Usage
