@@ -19,6 +19,7 @@ export const BookDetailsPage = () => {
   const { key } = useParams();
 
   const { data } = useFetch<WorkType>(`https://openlibrary.org${key}.json`);
+  console.log(data);
 
   useEffect(() => {
     if (data) {
@@ -186,10 +187,10 @@ export const BookDetailsPage = () => {
             <div className="bookCoverInfo">
               <h1 className="bookTitleFlex">Title: {data.title}</h1>
               {authorData.map((author, index) => (
-                <>
-                  <p key={index}>{author.name}</p>
+                <div key={index}>
+                  <p>{author.name}</p>
                   <p>{author.birth_date}</p>
-                </>
+                </div>
               ))}
             </div>
             <div className="descriptionContainer">
