@@ -19,7 +19,6 @@ export const BookDetailsPage = () => {
   const { key } = useParams();
 
   const { data } = useFetch<WorkType>(`https://openlibrary.org${key}.json`);
-  console.log(data);
 
   useEffect(() => {
     if (data) {
